@@ -1,9 +1,10 @@
 # ansible-install
 
+
 NOTE: THIS IMAGE IS TO BE USED FOR TEST AND LEARNIGN PURPOSES ONLY! NOT TO BE USED IN A PRODUCTION ENVIRONMENT!
 
 
-To install ansible on ubuntu and running playbook
+The easy way to install ansible on ubuntu and running playbook using docker
 
 Download the docker file "ankithannu/ansible:v1.1"
 has a preinstalled os ubuntu:16.04 ,ansible installed and ssh and other required configurations done.
@@ -16,12 +17,11 @@ docker run -itd --name ansible_master ankithannu/ansible:v1.1/bin/bash
 
 docker run -itd --name ansible_node ankithannu/ansible:v1.1/bin/bash
 
-# know the ip address of the running container
+# know the ip address of the running container node
 
-docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ansible_master
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ansible_node
 
-Note the ip address of ansible_node '<node-ip>'
+Note the ip address of ansible_node '{{node-ip}}'
 
 # Enter in the running master container
 

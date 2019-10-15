@@ -6,7 +6,7 @@ NOTE: THIS IMAGE IS TO BE USED FOR TEST AND LEARNIGN PURPOSES ONLY! NOT TO BE US
 To install ansible on ubuntu and running playbook
 
 Download the docker file "ankithannu/ansible:v1.1"
-ankithannu/ansible:v1.1 has a preinstalled os ubuntu:16.04 and ansible install and ssh and other required configurations done.
+has a preinstalled os ubuntu:16.04 ,ansible installed and ssh and other required configurations done.
 Please refer docker file ankithannu/ansible:v1.1 for details
 
 # Spin up the container
@@ -46,22 +46,22 @@ service ssh restart
 * sshd is running
 
 # From master
-ping '<node-ip>'
+ping '{{node-ip}}'
 
 # Generate the SSH key
  ssh-keygen
  Press enter 3 times as it ask ssh details.
 
 # Copy the ssh key and connect to node via ssh and verify
-ssh-copy-id root@'<node-ip>'
+ssh-copy-id root@'{{node-ip}}'
 
-ssh root@'<node-ip>'
+ssh root@'{{node-ip}}'
 
 # Add entry in the host file in the end of the file
 vi /etc/ansible/hosts
 
 [machine]
-'<node-ip>'
+'{{node-ip}}'
 
 # Try to ping
 ansible -m ping all
@@ -72,7 +72,7 @@ You will get the pong message means it is working perfectly and you can start wo
 # Sample inventory file
 inventory.txt
 [machine]
-node01 ansible_host='<node-ip>' ansible_connection=ssh ansible_user=root
+node01 ansible_host='{{node-ip}}' ansible_connection=ssh ansible_user=root
 
 sample playbook
 ---

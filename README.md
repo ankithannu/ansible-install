@@ -30,29 +30,38 @@ docker exec -it ansible_master sh
 # Create a directory ansible
 
 mkdir ansible
+
 cd ansible
 
 # Check the ssh service status and restart if required on master
 
 service ssh status
+
 service ssh restart
 
 * sshd is running
+
 # Check the ssh service status and restart if required on node by logging into another terminal
 
 docker exec -it ansible_node sh
+
 service ssh status
+
 service ssh restart
+
 * sshd is running
 
 # From master
+
 ping '{{node-ip}}'
 
 # Generate the SSH key
  ssh-keygen
- Press enter 3 times as it ask ssh details.
+
+Press enter 3 times as it ask ssh details.
 
 # Copy the ssh key and connect to node via ssh and verify
+
 ssh-copy-id root@'{{node-ip}}'
 
 ssh root@'{{node-ip}}'
@@ -61,9 +70,11 @@ ssh root@'{{node-ip}}'
 vi /etc/ansible/hosts
 
 [machine]
+
 '{{node-ip}}'
 
 # Try to ping
+
 ansible -m ping all
 
 You will get the pong message means it is working perfectly and you can start working on ansible.
@@ -71,18 +82,27 @@ You will get the pong message means it is working perfectly and you can start wo
 
 # Sample inventory file
 inventory.txt
+
 [machine]
+
 node01 ansible_host='{{node-ip}}' ansible_connection=ssh ansible_user=root
 
 sample playbook
+
 ---
+
 - hosts: machine
+
   become: true
+  
   tasks:
+  
   - name: Install Package
+    
     apt: name=vim,git state=latest
 
   # Run your first playbook
+  
   ansible-playbook -i inventory.txt playbook.yml
   
   
